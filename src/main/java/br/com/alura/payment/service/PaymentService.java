@@ -8,14 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.alura.payment.entity.Payment;
+import br.com.alura.payment.entity.PaymentDto;
+import br.com.alura.payment.entity.ReceiptDto;
+import br.com.alura.payment.entity.UserDto;
 import br.com.alura.payment.repository.PaymentRepository;
-import br.com.alura.payment.restapi.PaymentDto;
 
 @Service
 public class PaymentService {
 	
 	@Autowired
 	private PaymentRepository paymentRepository;
+	
+	@Autowired
+	private UserService userService;
 
 	public void save(UUID user) {
 		Payment payment = new Payment(user);
@@ -31,7 +36,11 @@ public class PaymentService {
 		
 	}
 	
-	public List<PaymentDto> getReceiptByUser() {
-		return null;
+	public ReceiptDto getReceiptByUser(UUID user) {
+		Payment payment = this.paymentRepository.findTopByUser(user);
+		
+		UserDto userDto = userService.getUser(user);
+		
+		return new ReceiptDto(payment, userDto);
 	}
 }

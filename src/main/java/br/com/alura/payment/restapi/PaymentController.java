@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.alura.payment.entity.PaymentDto;
+import br.com.alura.payment.entity.ReceiptDto;
 import br.com.alura.payment.service.PaymentService;
 
 @RestController
@@ -28,8 +30,12 @@ public class PaymentController {
 	
 	@GetMapping(path = "/{user}")
 	public ResponseEntity<List<PaymentDto>> getByUser(@PathVariable("user") final UUID user) {
-		return ResponseEntity.ok(this.paymentService.getByUser(user));
-		
+		return ResponseEntity.ok(this.paymentService.getByUser(user));	
+	}
+	
+	@GetMapping(path = "/receipt/{user}")
+	public ResponseEntity<ReceiptDto> getReceipt(@PathVariable("user") final UUID user) {
+		return ResponseEntity.ok(this.paymentService.getReceiptByUser(user));	
 	}
 	
 }

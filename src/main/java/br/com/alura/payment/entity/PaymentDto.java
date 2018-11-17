@@ -1,9 +1,8 @@
-package br.com.alura.payment.restapi;
+package br.com.alura.payment.entity;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-import br.com.alura.payment.entity.Payment;
 import br.com.alura.payment.enums.StatusEnum;
 
 public class PaymentDto {
